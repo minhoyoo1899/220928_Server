@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    #root {
+      width: 100vw;
+      height: 100vh;
+      background: #333;
+    }
+
+    #box {
+      width: 100px;
+      height: 100px;
+      background-color: #ccc;
+    }
+
+    .flex-center {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  </style>
+
+</head>
+
+<body>
+
+
+  <div id="root" class="flex-center">
+    <div id="box">
+
+    </div>
+  </div>
+  <script>
+    const dom = {
+      root: document.getElementById('root'),
+      box: document.getElementById('box'),
+    }
+    const {
+      box
+    } = dom;
+    box.style.position = "absolute";
+    box.style.top = "0px";
+    box.style.left = "0px";
+
+    const posValue = {
+      top: 0,
+      left: 0,
+    }
+
+    let state = true;
+
+
+
+    const promi = (val) => {
+      return new Promise((resolve, reject) => {
+        let getDown = setInterval(() => {
+          if (state === true) {
+            posValue.top++;
+            box.style.top = posValue.top + "px";
+            if (posValue.top === 500) {
+              clearInterval(getDown);
+              state = false;
+            } else {
+              state = true;
+            }
+          }
+        }, 16);
+        resolve(getDown);
+      });
+    };
+
+    const thenfunc = () => {
+      const getLeft = setInterval(() => {
+        if (state === false) {
+          posValue.left++;
+          box.style.left = posValue.left + "px";
+          if (posValue.left === 600) {
+            clearInterval(getLeft);
+            state = true;
+
+            posValue.top = 0;
+            posValue.left = 0;
+            box.style.top = posValue.top + "px";
+            box.style.left = posValue.left + "px";
+          } else {
+            state = false;
+          }
+        }
+      }, 16)
+    };
+
+    box.addEventListener('click', () => {
+      promi().then(thenfunc());
+      //console.log(promi("aaa"))
+    });
+
+    // box.addEventListener('click', new Promise((resolve, reject) => {
+    //   let moveInterval = () => {
+    //     if(state === true) {
+    //       posValue.top++;
+    //       box.style.top = posValue.top + "px";
+    //       if(posValue === 500) {
+    //         clearInterval(moveInterval);
+    //       }
+    //     }
+    //   };
+    // }));
+
+    //let myFirstPromise = new Promise((resolve, reject) => { });
+
+    // box.addEventListener('click', ()=> {
+    //   function getDown() {
+    //     return new Promise(function(resolve, reject) {
+    //       let moveInterval = () => {
+    //         if(state === true) {
+    //           posValue.top++;
+    //           box.style.top = posValue.top + "px";
+    //           if(posValue == 500) {
+    //             clearInterval(moveInterval);
+    //             state = false;
+    //           }
+    //         }
+    //       };
+    //       if(state === false) {
+    //         resolve(moveInterval);
+    //       }
+    //       //reject(new Error("응답에 실패하였습니다."));
+    //     });
+    //   }
+    //   getDown();
+    // });
+
+
+    // box.addEventListener('click', function moveEvent() {
+    //   return new Promise(function(resolve, reject) {
+    //     let getDown = setInterval(() => {
+    //       if(state === true) {
+    //         posValue.top++;
+    //         box.style.top = posValue.top + "px";
+    //         if(posValue ===  500) {
+    //           clearInterval(getDown);
+    //           state = false;
+    //           resolve(getDown);
+    //         } else {
+    //           state = true;
+    //         }
+    //       }
+    //     });
+    //   });
+    // });
+
+    // box.addEventListener('click', ()=> {
+    //   let getDown = new Promise(function(resolve, reject) {
+    //     let moveInterval = setInterval(() => {
+    //       if(state === true) {
+    //         posValue.top++;
+    //         box.style.top = posValue.top + "px";
+    //         if(posValue.top === 500) {
+    //           clearInterval(moveInterval);
+    //           state = false;
+    //         } else {
+    //           state = true;
+    //         }
+    //       }
+    //     });
+    //     resolve(moveInterval);
+    //   });
+    // });
+
+
+
+    // box.addEventListener('click', function getDown() {
+    //   return new Promise(function(resolve, reject) {
+    //     let moveTop = setInterval(()=> {
+    //       if(state === true) {
+    //         posValue.top++;
+    //         box.style.top = posValue.top + "px";
+    //         if(posValue.top === 500) {
+    //           clearInterval(moveTop);
+    //           state = false;
+    //         }
+    //       }
+    //     })
+    //   });
+    // });
+
+
+
+
+
+    // box.addEventListener('click', () => {
+
+    //   let moveTop = setInterval(() => {
+    //     console.log('interval start')
+    //     if (state === true) {
+    //       posValue.top++;
+    //       box.style.top = posValue.top + "px";
+    //       if (posValue.top === 500) {
+    //         clearInterval(moveTop);
+    //         state = false;
+    //         let moveLeft = setInterval(() => {
+    //           console.log('interval left');
+    //           posValue.left++;
+    //           box.style.left = posValue.left + "px";
+    //           if(posValue.left === 600) {
+    //             clearInterval(moveLeft);
+    //             state = false;
+
+    //             posValue.top = 0;
+    //             posValue.left = 0;
+    //             box.style.top = posValue.top + "px";
+    //             box.style.left = posValue.left + "px";
+
+    //           } else {
+    //             state = true;
+    //           }
+    //         }, 16);
+    //         //posValue.top = 0;
+    //         //box.style.top = posValue.top + "px";
+    //       } else {
+    //         state = true;
+    //       }
+    //     }
+    //   }, 16);
+    // })
+
+
+  </script>
+</body>
+
+</html>
